@@ -12,7 +12,12 @@
 - [ ] templates to create layout with HTML
 - [ ] caching middleware
 
+## Installation
+1. copy `.env.example` to `.env` and edit it
+2. run `docker-compose up` and open then website in the browser
 
+## Tests
+Run tests suit `./vendor/bin/phpunit`
 
 
 

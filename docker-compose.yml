@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  web:
+    container_name: webserver
+    build:
+      context: docker/nginx
+      dockerfile: Dockerfile
+    init: true
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - .:/var/www:delegated
+    ports:
+      - "${WEB_PORT}:80"
+    networks:
+      - in_net
+    depends_on:
+      - app
+  app:
+    container_name: app
+    build:
+      context: docker/php
+      dockerfile: Dockerfile
+    init: true
+    tty: true
+    restart: unless-stopped
+    volumes:
+      - .:/var/www:delegated
+    networks:
+      - in_net
+
+networks:
+  in_net:
+    driver: "bridge"
+volumes:
+  dbdata:
+    driver: local
